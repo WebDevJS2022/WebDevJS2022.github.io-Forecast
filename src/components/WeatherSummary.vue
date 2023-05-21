@@ -4,7 +4,7 @@
 
 <template>
     <div class="summary">
-        <div style="background-image: url('./img/weather-main/thunderstorm.png');" class="pic-main"></div>
+        <div style="background-image: url('src/assets/img/weather-main/thunderstorm.png');" class="pic-main"></div>
         <div class="weather">
             <div class="temp">
                 14 °C
