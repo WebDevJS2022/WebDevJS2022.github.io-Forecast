@@ -1,6 +1,19 @@
 <script setup>
+import { ref, onMounted } from 'vue' // для создания функции - реактивность
+import { API_KEY, BASE_URL } from './constants'
 import Highlights from './components/Highlights.vue';
 import WeatherSummary from './components/WeatherSummary.vue'
+
+const city = ref('Paris')
+const weatherInfo = ref(null)
+
+function getWeather() {
+  fetch(`${BASE_URL}?q=${city.value}&appid=${API_KEY}`)
+    .then((response) => response.json())
+    .then((data) => weatherInfo.value = data)
+}
+
+onMounted(getWeather)
 </script>
 
 <template>
@@ -12,7 +25,12 @@ import WeatherSummary from './components/WeatherSummary.vue'
               <section class="section section-left">
                 <div class="info">
                   <div class="city-inner">
-                    <input type="text" class="search">
+                    <input
+                    v-model="city"
+                    type="text"
+                    class="search"
+                    @keyup.enter="getWeather"
+                    >
                   </div>
                   <WeatherSummary />
                 </div>
