@@ -22,8 +22,8 @@ const props = defineProps({
             </div>
         </div>
         <div class="city text-block">
-            Paris,
-            FR
+            {{ weatherInfo?.name }},
+            {{ weatherInfo?.sys?.country }}
         </div>
         <div class="date text-block">
             Thu, March 16, 2023
