@@ -6,6 +6,8 @@ const props = defineProps({
     required: true,
   }
 })
+
+const today = new Date().toLocaleString('en-EN', { weekday: 'short', year: 'numeric', month: 'long', day: 'numeric' })
 </script>
 
 <template>
@@ -26,7 +28,7 @@ const props = defineProps({
             {{ weatherInfo?.sys?.country }}
         </div>
         <div class="date text-block">
-            Thu, March 16, 2023
+            {{ today }}
         </div>
     </div>
 </template>
