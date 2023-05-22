@@ -1,9 +1,14 @@
 <script setup>
-
+const props = defineProps({
+  weatherInfo: {
+    type: [Object, null],
+    required: true,
+  }
+})
 </script>
 
 <template>
-    <div class="section highlights">
+    <div v-if="weatherInfo?.weather" class="section highlights">
         <div class="title">
             Today's Highlights
         </div>
@@ -18,7 +23,7 @@
                         <div class="card-justify">
                             <div class="info-main">
                                 <div class="info-main-num">
-                                    3.6
+                                    {{ weatherInfo?.wind?.speed }}
                                 </div>
                                 <div class="info-main-text">
                                     m/s
@@ -26,7 +31,7 @@
                             </div>
                             <div class="info-main">
                                 <div class="info-main-num">
-                                    350
+                                    {{ weatherInfo?.wind?.deg }}
                                 </div>
                                 <div class="info-main-text">
                                     deg
@@ -40,9 +45,9 @@
                         Wind gusts
                     </div>
                     <div class="card-small-info">
-                        <div class="card-small-data">
+                        <div v-if="weatherInfo?.wind?.gust" class="card-small-data">
                             <div class="info-main-num">
-                                8.4
+                                {{ Math.round(weatherInfo?.wind?.gust) }}
                             </div>
                             <div class="info-main-text">
                                 m/s
