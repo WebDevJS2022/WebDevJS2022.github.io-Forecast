@@ -1,12 +1,25 @@
 <script setup>
-import { getPressureMm } from '../utils/index'
+import { computed } from 'vue'; // для создания вычисляемых переменных
+import { getPressureMm, getTime } from '../utils/index';
 
 const props = defineProps({
   weatherInfo: {
     type: [Object, null],
     required: true,
-  }
-})
+  },
+});
+
+// 1-ая вычмсляемая переменная
+const timezone = computed(() => props.weatherInfo?.timezone);
+
+// 2-ая вычмсляемая переменная
+const sunriseTime = computed(() => {
+    return getTime(props.weatherInfo?.sys?.sunrise + timezone.value);
+});
+
+const sunsetTime = computed(() => {
+    return getTime(props.weatherInfo?.sys?.sunset + timezone.value);
+});
 </script>
 
 <template>
@@ -122,7 +135,7 @@ const props = defineProps({
                                     Sunrise
                                 </div>
                                 <div class="state-time">
-                                    07:31:42
+                                    {{ sunriseTime }}
                                 </div>
                             </div>
                             <div class="state">
@@ -131,7 +144,7 @@ const props = defineProps({
                                     Sunset
                                 </div>
                                 <div class="state-time">
-                                    18:34:19
+                                    {{ sunsetTime }}
                                 </div>
                             </div>
                         </div>
@@ -144,7 +157,7 @@ const props = defineProps({
                     <div class="card-small-info">
                         <div class="card-small-data">
                             <div class="info-main-num">
-                                80
+                                {{ weatherInfo?.clouds?.all }}
                             </div>
                             <div class="info-main-text">
                                 %
